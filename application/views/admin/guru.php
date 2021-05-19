@@ -6,8 +6,14 @@
                         <!-- Card  Dashboard-->
                         <div class="card">
                             <div class="card-header ">
-                                <div class="">Kelas</div>
-                                <button type="button" class="btn btn-primary d-flex align-item-end">Tambah</button>
+                                <div class="row">
+                                    <div class="col-10">
+                                        <div class="card-name">Kelas</div>
+                                    </div>
+                                    <div class="col-2">
+                                        <s href="#" class="btn btn-primary btn-sm" role="button">Tambah</s>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="row">

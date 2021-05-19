@@ -11,7 +11,7 @@
                                         <div class="card-name">Kelas</div>
                                     </div>
                                     <div class="col-2">
-                                        <a href="<?php echo site_url('admin/siswa?add=siswa') ?>" class="btn btn-primary btn-sm" role="button">Tambah</a>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahModal">Tambah</button>
                                     </div>
                                 </div>
                             </div>
@@ -21,9 +21,9 @@
                                         <thead>
                                             <tr>
                                                 <th scope="col">#</th>
-                                                <th scope="col">Tahun masuk</th>
                                                 <th scope="col">Nama</th>
-                                                <th scope="col">NIS</th>
+                                                <th scope="col">induk</th>
+                                                <th scope="col">NISN</th>
                                                 <th scope="col">aksi</th>
                                             </tr>
                                         </thead>
@@ -32,8 +32,8 @@
                                             foreach ($siswas as $siswa) : ?>
                                                 <tr>
                                                     <th scope="row"><?php echo $no++; ?></th>
-                                                    <td><?php echo $siswa['tanggalmasuk']; ?></td>
                                                     <td><?php echo $siswa['nama']; ?></td>
+                                                    <td><?php echo $siswa['induk']; ?></td>
                                                     <td><?php echo $siswa['nisn'] ?> </td>
                                                     <td>
                                                         <div class="dropdown">
@@ -59,3 +59,34 @@
                 </div>
             </div>
             <!-- Akhir ISI Utama -->
+
+
+            <!-- modal -->
+            <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form action="<?php echo site_url('admin/kelas?read='). $id_kelas ?>" method="post">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                    <div class="input-group mb-3">
+                                        <label class="input-group-text" for="inputGroupSelect01">Options</label>
+                                        <select class="form-select" id="inputGroupSelect01" name="siswa">
+                                            <option selected>Choose...</option>            
+                                            <?php foreach ($tambahs as $tambah) :?>
+                                            <option value="<?php echo $tambah['id_siswa']?>"><?php echo $tambah['nama']?></option>
+                                            <?php endforeach; ?>
+                                        </select>
+                                    </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Save changes</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- akhir modal -->

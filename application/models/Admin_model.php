@@ -4,15 +4,28 @@ class Admin_model extends CI_Model
 {
 
     // kelas
-    public function data_kelas()
+    public function data_kelas($id = null)
     {
 
-        $query = "SELECT * 
-        FROM tb_kelas";
+
+        if ($id != null) {
+            $query = "SELECT tb_siswa.id_siswa, tb_siswa.nama, tb_siswa.nisn, tb_siswa.induk, tb_kelas.kelas  
+            FROM tb_absen 
+            INNER JOIN tb_siswa on tb_siswa.id_siswa = tb_absen.id_siswa
+            INNER JOIN tb_kelas ON tb_kelas.id_kelas = tb_absen.id_kelas
+            WHERE tb_absen.id_kelas = $id";
+        } else {
+            $query = "SELECT * 
+                    FROM tb_kelas";
+        }
+
 
         $data = $this->db->query($query);
         return $data;
     }
+
+
+
     public function data_walikelas()
     {
 
@@ -54,6 +67,21 @@ class Admin_model extends CI_Model
                 WHERE id_kelas = $id_kelas ";
 
         $this->db->query($query);
+    }
+
+    public function input_siswakelas($data)
+    {
+
+        $data1 = [
+
+            'id_absen'  => '',
+            'id_kelas'  => $data['kelas'],
+            'id_siswa'  => $data['siswa'],
+            'id_nilai1' => '',
+            'id_nilai1' => ''
+        ];
+
+        $this->db->insert('tb_absen', $data1);
     }
 
 
@@ -157,9 +185,29 @@ class Admin_model extends CI_Model
 
     public function input_siswa($data)
     {
-        $query = "INSERT INTO tb_siswa VALUES $data";
+        $data1 = [
+            'id_siswa'       => htmlspecialchars($data['id_siswa']),
+            'induk'         => htmlspecialchars($data['induk']),
+            'nisn'           => htmlspecialchars($data['nisn']),
+            'nama'          => htmlspecialchars($data['nama']),
+            'tempat_lahir'  => htmlspecialchars($data['tempat_lahir']),
+            'tanggal_lahir' => htmlspecialchars($data['tanggal_lahir']),
+            'jeniskelamin'  => htmlspecialchars($data['jeniskelamin']),
+            'agama'         => htmlspecialchars($data['agama']),
+            'statuskeluarga' => htmlspecialchars($data['statuskeluarga']),
+            'anak'          => htmlspecialchars($data['anak']),
+            'alamat'        => htmlspecialchars($data['alamat']),
+            'telp'          => htmlspecialchars($data['telp']),
+            'sekolahasal'   => htmlspecialchars($data['sekolahasal']),
+            'tanggalmasuk'  => htmlspecialchars($data['tanggalmasuk']),
+            'ayah'          => htmlspecialchars($data['ayah']),
+            'ibu'           => htmlspecialchars($data['ibu']),
+            'pekerjaanayah' => htmlspecialchars($data['pekerjaanayah']),
+            'pekerjaanibu'  => htmlspecialchars($data['pekerjaanibu']),
+            'foto'          => htmlspecialchars($data['foto']),
+        ];
 
-        $this->db->query($query);
+        $this->db->insert('tb_siswa', $data1);
     }
 
     public function update_siswa($data)

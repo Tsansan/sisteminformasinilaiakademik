@@ -13,7 +13,7 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form class="" action="<?php echo site_url('admin/siswa?add=1') ?>" method="POST">
+                                <form class="" action="<?php echo site_url('admin/siswa?add=siswa') ?>" method="POST">
                                     <input type="hidden" name="id_siswa" value="">
                                     <div class="col-md-7">
                                         <label for="induk" class="form-label">NIS</label>
@@ -103,7 +103,7 @@
                                     </div>
                                     <input type="hidden" name="foto">
                                     <div class="col-12 my-3">
-                                        <button type="submit" class="btn btn-primary">Update</button>
+                                        <button type="submit" class="btn btn-primary">Tambah</button>
                                     </div>
                                 </form>
                             </div>

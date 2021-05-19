@@ -6,8 +6,14 @@
                         <!-- Card  Dashboard-->
                         <div class="card">
                             <div class="card-header ">
-                                <div class="">Kelas</div>
-                                <button type="button" class="btn btn-primary d-flex align-item-end">Tambah</button>
+                                <div class="row">
+                                    <div class="col-10">
+                                        <div class="card-name">Kelas</div>
+                                    </div>
+                                    <div class="col-2">
+                                        <a href="#" class="btn btn-primary btn-sm" role="button">Tambah</a>
+                                    </div>
+                                </div>
                             </div>
                             <div class="card-body">
                                 <div class="row">
@@ -40,8 +46,8 @@
                                                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                                             </button>
                                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                                <li><a class="dropdown-item" href="<?php echo site_url('admin/guru') . "?read=" . $kelas['id_kelas'] ?>">Lihat Siswa</a></li>
-                                                                <li><a class="dropdown-item" href="<?php echo site_url('admin/guru') . "?delete=" . $kelas['id_kelas'] ?>">Hapus</a></li>
+                                                                <li><a class="dropdown-item" href="<?php echo site_url('admin/kelas') . "?read=" . $kelas['id_kelas'] ?>">Lihat Siswa</a></li>
+                                                                <li><a class="dropdown-item" href="<?php echo site_url('admin/kelas') . "?delete=" . $kelas['id_kelas'] ?>">Hapus</a></li>
                                                             </ul>
                                                         </div>
                                                     </td>

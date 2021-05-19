@@ -24,8 +24,9 @@
 }
 
 
-.card .judul {
-	font-size: 14px;
+.card-name {
+	font-size: 25px;
+	font-weight: 400;
 
 }
 

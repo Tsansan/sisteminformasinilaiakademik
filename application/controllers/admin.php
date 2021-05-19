@@ -41,6 +41,25 @@ class admin extends CI_Controller
         //Lihat Siswa
         $bacakelas = $this->input->get('read');
         if ($bacakelas != null) {
+
+            print_r($_POST);
+            if ($_POST != null) {
+                $input = [
+                    'kelas' => $bacakelas,
+                    'siswa' => $_POST['siswa']
+                ];
+                $this->Admin_model->input_siswakelas($input);
+            }
+
+            $data['tambahs']    = $this->Admin_model->data_siswa()->result_array();
+            $data['id_kelas']   = $bacakelas;
+            $data['siswas']     = $this->Admin_model->data_kelas($bacakelas)->result_array();
+
+            print_r($bacakelas);
+            $this->load->view('admin/auth/header', $data);
+            $this->load->view('admin/auth/sidebar');
+            $this->load->view('admin/kelassiswa');
+            $this->load->view('admin/auth/footer');
         }
 
 
@@ -87,9 +106,6 @@ class admin extends CI_Controller
         // View
         $data['gurus'] = $this->Admin_model->data_guru()->result_array();
 
-        print_r($data['mengajars']);
-        echo "<br>";
-        print_r($data['gurus']);
         $this->load->view('admin/auth/header', $data,);
         $this->load->view('admin/auth/sidebar');
         $this->load->view('admin/guru');
@@ -112,10 +128,25 @@ class admin extends CI_Controller
             }
 
             $data['siswa'] = $this->Admin_model->data_siswa($update)->row_array();
-            print_r($data['siswa']);
-            $this->load->view('admin/auth/header', $data,);
+            $this->load->view('admin/auth/header', $data);
             $this->load->view('admin/auth/sidebar');
             $this->load->view('admin/updatesiswa');
+            $this->load->view('admin/auth/footer');
+        }
+
+        // Add
+        $add = $this->input->get('add');
+        if ($add != null) {
+
+            if ($_POST) {
+                $this->Admin_model->input_siswa($_POST);
+
+                redirect('admin/siswa');
+            }
+
+            $this->load->view('admin/auth/header');
+            $this->load->view('admin/auth/sidebar');
+            $this->load->view('admin/tambahsiswa');
             $this->load->view('admin/auth/footer');
         }
 
