@@ -47,6 +47,7 @@
                                                             </button>
                                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                                 <li><a class="dropdown-item" href="<?php echo site_url('admin/kelas') . "?read=" . $kelas['id_kelas'] ?>">Lihat Siswa</a></li>
+                                                                <li><a class="dropdown-item" href="<?php echo site_url('admin/kelas') . "?update=" . $kelas['id_kelas'] ?>">Hapus</a></li>
                                                                 <li><a class="dropdown-item" href="<?php echo site_url('admin/kelas') . "?delete=" . $kelas['id_kelas'] ?>">Hapus</a></li>
                                                             </ul>
                                                         </div>

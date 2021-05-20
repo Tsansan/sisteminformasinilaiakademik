@@ -65,25 +65,25 @@
             <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
                     <div class="modal-content">
-                        <form action="<?php echo site_url('admin/kelas?read='). $id_kelas ?>" method="post">
+                        <form action="<?php echo site_url('admin/kelas?read=') . $id_kelas ?>" method="post">
                             <div class="modal-header">
-                                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah Siswa</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                             </div>
                             <div class="modal-body">
-                                    <div class="input-group mb-3">
-                                        <label class="input-group-text" for="inputGroupSelect01">Options</label>
-                                        <select class="form-select" id="inputGroupSelect01" name="siswa">
-                                            <option selected>Choose...</option>            
-                                            <?php foreach ($tambahs as $tambah) :?>
-                                            <option value="<?php echo $tambah['id_siswa']?>"><?php echo $tambah['nama']?></option>
-                                            <?php endforeach; ?>
-                                        </select>
-                                    </div>
+                                <div class="input-group mb-3">
+                                    <label class="input-group-text" for="inputGroupSelect01">Nama</label>
+                                    <select class="form-select" id="inputGroupSelect01" name="siswa">
+                                        <option selected>Choose...</option>
+                                        <?php foreach ($tambahs as $tambah) : ?>
+                                            <option value="<?php echo $tambah['id_siswa'] ?>"><?php echo $tambah['nama'] ?></option>
+                                        <?php endforeach; ?>
+                                    </select>
+                                </div>
                             </div>
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="submit" class="btn btn-primary">Save changes</button>
+                                <button type="submit" class="btn btn-primary">Tambah</button>
                             </div>
                         </form>
                     </div>

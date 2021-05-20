@@ -9,7 +9,7 @@ class Admin_model extends CI_Model
 
 
         if ($id != null) {
-            $query = "SELECT tb_siswa.id_siswa, tb_siswa.nama, tb_siswa.nisn, tb_siswa.induk, tb_kelas.kelas  
+            $query = "SELECT tb_siswa.id_siswa, tb_siswa.nama, tb_siswa.nisn, tb_siswa.induk, tb_kelas.kelas, tb_kelas.id_kelas, tb_kelas.walikelas  
             FROM tb_absen 
             INNER JOIN tb_siswa on tb_siswa.id_siswa = tb_absen.id_siswa
             INNER JOIN tb_kelas ON tb_kelas.id_kelas = tb_absen.id_kelas

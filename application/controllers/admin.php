@@ -42,7 +42,6 @@ class admin extends CI_Controller
         $bacakelas = $this->input->get('read');
         if ($bacakelas != null) {
 
-            print_r($_POST);
             if ($_POST != null) {
                 $input = [
                     'kelas' => $bacakelas,
@@ -55,11 +54,17 @@ class admin extends CI_Controller
             $data['id_kelas']   = $bacakelas;
             $data['siswas']     = $this->Admin_model->data_kelas($bacakelas)->result_array();
 
-            print_r($bacakelas);
             $this->load->view('admin/auth/header', $data);
             $this->load->view('admin/auth/sidebar');
             $this->load->view('admin/kelassiswa');
             $this->load->view('admin/auth/footer');
+        }
+
+        //Update kelas
+        $update = $this->input->get('update');
+        if ($update != null) {
+
+            $data['kelass'] = $this->Admin_model->data_kelas($update);
         }
 
 
