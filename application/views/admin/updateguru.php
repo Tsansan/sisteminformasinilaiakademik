@@ -65,6 +65,21 @@
                                         <label for="telp" class="form-label">Telp</label>
                                         <input type="text" class="form-control" id="telp" name="telp" value="<?php echo $gurus['telp'] ?>">
                                     </div>
+                                    <div class="col-7">
+                                        <label for="telp" class="form-label">Kelas Yang di Ampu</label>
+                                        <div class="col-2">
+                                            <input type="text" class="form-control" id="ttl" name="tempat_lahir" value="<?php echo $gurus['tempat_lahir'] ?>">
+                                        </div>
+                                        <div class="col-2">
+                                            <input type="text" class="form-control" id="ttl" name="tanggal_lahir" value="<?php echo $gurus['tanggal_lahir'] ?>">
+                                        </div>
+                                        <div class="col-2">
+                                            <input type="text" class="form-control" id="ttl" name="tempat_lahir" value="<?php echo $gurus['tempat_lahir'] ?>">
+                                        </div>
+                                        <div class="col-2">
+                                            <input type="text" class="form-control" id="ttl" name="tanggal_lahir" value="<?php echo $gurus['tanggal_lahir'] ?>">
+                                        </div>
+                                    </div>
                                     <input type="hidden" name="foto" value="<?php echo $gurus['foto'] ?>">
                                     <input type="hidden" name="ttd" value="<?php echo $gurus['ttd'] ?>">
                                     <div class="col-12 my-3">

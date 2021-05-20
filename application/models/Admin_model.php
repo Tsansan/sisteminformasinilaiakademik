@@ -90,7 +90,10 @@ class Admin_model extends CI_Model
     {
 
         if ($idguru != null) {
-            $query = "SELECT * FROM tb_guru WHERE id_guru = $idguru";
+            $query = "SELECT * FROM tb_mengajar 
+            INNER JOIN  tb_guru ON tb_guru.id_guru = tb_mengajar.id_guru 
+            INNER JOIN tb_kelas ON tb_kelas.id_kelas = tb_mengajar.id_kelas
+            WHERE tb_mengajar.id_guru = $idguru";
         } else {
             $query = "SELECT * FROM tb_guru";
         }

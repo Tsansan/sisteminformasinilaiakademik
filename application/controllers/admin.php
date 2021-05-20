@@ -95,7 +95,6 @@ class admin extends CI_Controller
                 $this->Admin_model->update_guru($id);
                 redirect('admin/guru');
             }
-
             $data['gurus'] = $this->Admin_model->data_guru($update)->row_array();
 
             print_r($data['gurus']);
@@ -110,6 +109,8 @@ class admin extends CI_Controller
 
         // View
         $data['gurus'] = $this->Admin_model->data_guru()->result_array();
+
+        print_r($data['gurus']);
 
         $this->load->view('admin/auth/header', $data,);
         $this->load->view('admin/auth/sidebar');

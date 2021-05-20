@@ -8,7 +8,7 @@
                             <div class="card-header ">
                                 <div class="row">
                                     <div class="col-10">
-                                        <div class="card-name">Kelas</div>
+                                        <div class="card-name">Guru</div>
                                     </div>
                                     <div class="col-2">
                                         <s href="#" class="btn btn-primary btn-sm" role="button">Tambah</s>
