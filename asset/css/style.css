@@ -40,7 +40,7 @@
 
 /* body guru */
 .body {
-	height: auto;
+	height: 10px;
 }
 
 
@@ -100,9 +100,6 @@
 
 
 /* is-guru */
-.isi-guru {
-	position: sticky;
-}
 
 
 /* tombol */

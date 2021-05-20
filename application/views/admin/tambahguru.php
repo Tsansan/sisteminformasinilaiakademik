@@ -16,31 +16,31 @@
                                 </div>
                             </div>
                             <div class="card-body">
-                                <form class="" action="<?php echo site_url('admin/guru?update=') . $gurus['id_guru'] ?>" method="POST">
-                                    <input type="hidden" name="id_guru" value="<?php echo $gurus['id_guru'] ?>">
+                                <form class="" action="<?php echo site_url('admin/guru?add=guru') ?>" method="POST">
+                                    <input type="hidden" name="id_guru" value="">
                                     <div class="col-md-7">
                                         <label for="induk" class="form-label">NIP</label>
-                                        <input type="text" class="form-control" id="induk" name="induk" value="<?php echo $gurus['induk'] ?>">
+                                        <input type="text" class="form-control" id="induk" name="induk" value="">
                                     </div>
                                     <div class="col-md-7">
                                         <label for="nama" class="form-label">Nama</label>
-                                        <input type="text" class="form-control" id="nama" name="nama" value="<?php echo $gurus['nama'] ?>">
+                                        <input type="text" class="form-control" id="nama" name="nama" value="">
                                     </div>
                                     <div class="col-12">
                                         <label for="ttl" class="form-label">Tempat Tanggal Lahir</label>
                                         <div class="row">
                                             <div class="col-3">
-                                                <input type="text" class="form-control" id="ttl" name="tempat_lahir" value="<?php echo $gurus['tempat_lahir'] ?>">
+                                                <input type="text" class="form-control" id="ttl" name="tempat_lahir" value="">
                                             </div>
                                             <div class="col-4">
-                                                <input type="date" class="form-control" id="ttl" name="tanggal_lahir" value="<?php echo $gurus['tanggal_lahir'] ?>">
+                                                <input type="date" class="form-control" id="ttl" name="tanggal_lahir" value="">
                                             </div>
                                         </div>
                                     </div>
                                     <div class="col-7">
                                         <label class="form-label" for="jeniskelamin">Jenis Kelamin</label>
                                         <select class="form-select" id="jeniskelamin" name="jeniskelamin">
-                                            <option selected value="<?php echo $gurus['jeniskelamin'] ?>"><?php echo $gurus['jeniskelamin'] ?></option>
+                                            <option selected value="">...</option>
                                             <option value="laki-laki">Laki-Laki</option>
                                             <option value="perempuan">Perempuan</option>
                                         </select>
@@ -48,7 +48,7 @@
                                     <div class="col-7">
                                         <label class="form-label" for="agama">Agama</label>
                                         <select class="form-select" id="agama" name="agama">
-                                            <option selected value="<?php echo $gurus['agama'] ?>"><?php echo $gurus['agama'] ?></option>
+                                            <option selected value="">...</option>
                                             <option value="islam">Islam</option>
                                             <option value="kristen protestan">Kristen Protestan</option>
                                             <option value="kristen katolik">Kristen Katolik</option>
@@ -59,14 +59,14 @@
                                     </div>
                                     <div class="col-7">
                                         <label for="alamat" class="form-label">Alamat</label>
-                                        <input type="text" id="alamat" class="form-control" name="alamat" value="<?php echo $gurus['alamat'] ?>">
+                                        <input type="text" id="alamat" class="form-control" name="alamat" value="">
                                     </div>
                                     <div class="col-7">
                                         <label for="telp" class="form-label">Telp</label>
-                                        <input type="text" class="form-control" id="telp" name="telp" value="<?php echo $gurus['telp'] ?>">
+                                        <input type="text" class="form-control" id="telp" name="telp" value="">
                                     </div>
-                                    <input type="hidden" name="foto" value="<?php echo $gurus['foto'] ?>">
-                                    <input type="hidden" name="ttd" value="<?php echo $gurus['ttd'] ?>">
+                                    <input type="hidden" name="foto" value="default.jpg">
+                                    <input type="hidden" name="ttd" value="default.jpg">
                                     <div class="col-12 my-3">
                                         <button type="submit" class="btn btn-primary">Sign in</button>
                                     </div>

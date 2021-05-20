@@ -1,6 +1,6 @@
             <!-- Isi Utama -->
             <div class="col-lg-10 isi-guru">
-                <div class="container-fluid" style="height: 50000px;">
+                <div class="container-fluid mb-5">
                     <div class="pt-5">
 
                         <!-- Card  Dashboard-->
@@ -40,8 +40,7 @@
                                                             <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
                                                             </button>
                                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                                                                <li><a class="dropdown-item" href="<?php echo site_url('admin/siswa') . "?update=" . $siswa['id_siswa'] ?>">Lihat Siswa</a></li>
-                                                                <li><a class="dropdown-item" href="<?php echo site_url('admin/siswa') . "?delete=" . $siswa['id_siswa'] ?>">Hapus</a></li>
+                                                                <li><a class="dropdown-item" href="<?php echo site_url('admin/kelas') . "?read=" . $siswa['id_kelas'] . "&delete=" . $siswa['id_absen'] ?>">Hapus</a></li>
                                                             </ul>
                                                         </div>
                                                     </td>

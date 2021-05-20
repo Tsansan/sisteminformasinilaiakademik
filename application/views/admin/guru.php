@@ -1,6 +1,6 @@
             <!-- Isi Utama -->
             <div class="col-lg-10 isi-guru">
-                <div class="container-fluid" style="height: 50000px;">
+                <div class="container-fluid mb-5">
                     <div class="pt-5">
 
                         <!-- Card  Dashboard-->
@@ -11,7 +11,7 @@
                                         <div class="card-name">Guru</div>
                                     </div>
                                     <div class="col-2">
-                                        <s href="#" class="btn btn-primary btn-sm" role="button">Tambah</s>
+                                        <a href="<?php echo site_url('admin/guru?add=guru') ?>" class="btn btn-primary btn-sm" role="button">Tambah</a>
                                     </div>
                                 </div>
                             </div>

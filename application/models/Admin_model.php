@@ -4,16 +4,20 @@ class Admin_model extends CI_Model
 {
 
     // kelas
-    public function data_kelas($id = null)
+    public function data_kelas($idkelas1 = null, $idkelas2 = null)
     {
 
 
-        if ($id != null) {
-            $query = "SELECT tb_siswa.id_siswa, tb_siswa.nama, tb_siswa.nisn, tb_siswa.induk, tb_kelas.kelas, tb_kelas.id_kelas, tb_kelas.walikelas  
-            FROM tb_absen 
+        if ($idkelas1 != null) {
+            $query = "SELECT * 
+                    FROM tb_kelas
+                    WHERE id_kelas = $idkelas1";
+        } elseif ($idkelas2 != null) {
+            $query = "SELECT *  
+            FROM tb_absen
             INNER JOIN tb_siswa on tb_siswa.id_siswa = tb_absen.id_siswa
             INNER JOIN tb_kelas ON tb_kelas.id_kelas = tb_absen.id_kelas
-            WHERE tb_absen.id_kelas = $id";
+            WHERE tb_absen.id_kelas = $idkelas2";
         } else {
             $query = "SELECT * 
                     FROM tb_kelas";
@@ -39,10 +43,10 @@ class Admin_model extends CI_Model
     }
 
 
-    public function input_kelas($data)
+    public function input_kelas($id_kelas = null)
     {
 
-        $query = "INSERT INTO tb_kelas Values $data";
+        $query = "INSERT INTO tb_kelas Values $id_kelas";
 
         $this->db->query($query);
     }
@@ -50,21 +54,29 @@ class Admin_model extends CI_Model
     public function update_kelas($data)
     {
 
-        $id_kelas = $data['id_kelas'];
+        $data1 = [
 
-        $query = "UPDATE tb_kelas
-                SET $data
-                WHERE id_kelas = $id_kelas ;";
+            'id_kelas'  => $data['id_kelas'],
+            'tahun'     => date('Y'),
+            'kelas'     => $data['kelas'],
+            'walikelas' => $data['walikelas']
+        ];
 
-        $this->db->query($query);
+        $this->db->update('tb_kelas', $data1, ['id_kelas' => $data['id_kelas']]);
     }
 
-    public function delete_kelas($data)
+    public function delete_kelas($id_kelas = null, $absen = null)
     {
-        $id_kelas = $data['id_kelas'];
-        $query = "DELETE FROM
-                tb_kelas 
-                WHERE id_kelas = $id_kelas ";
+
+        if ($absen != null) {
+            $query = "DELETE FROM
+            tb_absen 
+            WHERE id_absen = $absen ";
+        } elseif ($id_kelas != null) {
+            $query = "DELETE FROM
+            tb_kelas 
+            WHERE id_kelas = $id_kelas ";
+        }
 
         $this->db->query($query);
     }
@@ -105,9 +117,22 @@ class Admin_model extends CI_Model
 
     public function input_guru($data)
     {
-        $query = "INSERT INTO tb_guru VALUES $data";
 
-        $this->db->query($query);
+        $data1 = [
+            'id_guru'       => htmlspecialchars($data['id_guru']),
+            'induk'         => htmlspecialchars($data['induk']),
+            'nama'          => htmlspecialchars($data['nama']),
+            'tempat_lahir'  => htmlspecialchars($data['tempat_lahir']),
+            'tanggal_lahir' => htmlspecialchars($data['tanggal_lahir']),
+            'jeniskelamin'  => htmlspecialchars($data['jeniskelamin']),
+            'agama'         => htmlspecialchars($data['agama']),
+            'alamat'        => htmlspecialchars($data['alamat']),
+            'telp'          => htmlspecialchars($data['telp']),
+            'foto'          => htmlspecialchars($data['foto']),
+            'ttd'           => htmlspecialchars($data['ttd'])
+        ];
+
+        $this->db->insert('tb_guru', $data1);
     }
 
     public function update_guru($data)
@@ -116,7 +141,7 @@ class Admin_model extends CI_Model
         $id = $data['id_guru'];
 
         $data1 = [
-            'id-guru'       => htmlspecialchars($id),
+            'id_guru'       => htmlspecialchars($id),
             'induk'         => htmlspecialchars($data['induk']),
             'nama'          => htmlspecialchars($data['nama']),
             'tempat_lahir'  => htmlspecialchars($data['tempat_lahir']),

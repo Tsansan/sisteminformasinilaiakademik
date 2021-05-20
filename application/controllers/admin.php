@@ -38,10 +38,14 @@ class admin extends CI_Controller
     public function kelas()
     {
 
-        //Lihat Siswa
+
         $bacakelas = $this->input->get('read');
+        $update = $this->input->get('update');
+
+        //Lihat Siswa
         if ($bacakelas != null) {
 
+            //add siswa
             if ($_POST != null) {
                 $input = [
                     'kelas' => $bacakelas,
@@ -50,9 +54,15 @@ class admin extends CI_Controller
                 $this->Admin_model->input_siswakelas($input);
             }
 
+            //delete siswa
+            $delete = $this->input->get('delete');
+            if ($delete != null) {
+                $this->Admin_model->delete_kelas(null, $delete);
+            }
+
             $data['tambahs']    = $this->Admin_model->data_siswa()->result_array();
             $data['id_kelas']   = $bacakelas;
-            $data['siswas']     = $this->Admin_model->data_kelas($bacakelas)->result_array();
+            $data['siswas']     = $this->Admin_model->data_kelas(null, $bacakelas)->result_array();
 
             $this->load->view('admin/auth/header', $data);
             $this->load->view('admin/auth/sidebar');
@@ -61,34 +71,57 @@ class admin extends CI_Controller
         }
 
         //Update kelas
-        $update = $this->input->get('update');
-        if ($update != null) {
+        else if ($update != null) {
 
-            $data['kelass'] = $this->Admin_model->data_kelas($update);
+            if ($_POST != null) {
+                $this->Admin_model->update_kelas($_POST);
+                redirect("admin/kelas");
+            }
+
+            $data['kelass'] = $this->Admin_model->data_kelas($update)->row_array();
+            $data['gurus']   = $this->Admin_model->data_guru()->result_array();
+
+            print_r($data['kelass']);
+            echo "<br>";
+            print_r($update);
+            $this->load->view('admin/auth/header', $data);
+            $this->load->view('admin/auth/sidebar');
+            $this->load->view('admin/updatekelas');
+            $this->load->view('admin/auth/footer');
+        } else {
+            $data['kelass'] = $this->Admin_model->data_kelas()->result_array();
+            $data['walikelass'] = $this->Admin_model->data_walikelas()->result_array();
+
+            $this->load->view('admin/auth/header', $data);
+            $this->load->view('admin/auth/sidebar');
+            $this->load->view('admin/kelas');
+            $this->load->view('admin/auth/footer');
         }
-
-
-        $data['kelass'] = $this->Admin_model->data_kelas()->result_array();
-        $data['walikelass'] = $this->Admin_model->data_walikelas()->result_array();
-
-        $this->load->view('admin/auth/header', $data);
-        $this->load->view('admin/auth/sidebar');
-        $this->load->view('admin/kelas');
-        $this->load->view('admin/auth/footer');
     }
+
+    // 
+    // 
+    // 
+    // 
+    // 
 
     public function guru()
     {
-        // delete
+
         $delete = $this->input->get('delete');
+        $update = $this->input->get('update');
+        $add = $this->input->get('add');
+
+
+
+        // delete
         if ($delete != null) {
             $this->admin_model->delete_guru($delete);
             redirect('admin/guru');
         }
 
         // update
-        $update = $this->input->get('update');
-        if ($update != null) {
+        else if ($update != null) {
 
             if ($_POST != null) {
                 $id = $_POST;
@@ -97,25 +130,38 @@ class admin extends CI_Controller
             }
             $data['gurus'] = $this->Admin_model->data_guru($update)->row_array();
 
-            print_r($data['gurus']);
             $this->load->view('admin/auth/header', $data);
             $this->load->view('admin/auth/sidebar');
             $this->load->view('admin/updateguru');
             $this->load->view('admin/auth/footer');
         }
 
+        // Tambah
+        else if ($add == "guru") {
+
+            if ($_POST != null) {
+
+                $this->Admin_model->input_guru($_POST);
+                redirect('admin/guru');
+            }
+
+            $this->load->view('admin/auth/header');
+            $this->load->view('admin/auth/sidebar');
+            $this->load->view('admin/tambahguru');
+            $this->load->view('admin/auth/footer');
+        }
+
         // kelas
-        $data['mengajars'] = $this->Admin_model->mengajar()->result_array();
+        else {
+            $data['mengajars'] = $this->Admin_model->mengajar()->result_array();
+            // View
+            $data['gurus'] = $this->Admin_model->data_guru()->result_array();
 
-        // View
-        $data['gurus'] = $this->Admin_model->data_guru()->result_array();
-
-        print_r($data['gurus']);
-
-        $this->load->view('admin/auth/header', $data,);
-        $this->load->view('admin/auth/sidebar');
-        $this->load->view('admin/guru');
-        $this->load->view('admin/auth/footer');
+            $this->load->view('admin/auth/header', $data,);
+            $this->load->view('admin/auth/sidebar');
+            $this->load->view('admin/guru');
+            $this->load->view('admin/auth/footer');
+        }
     }
 
 
