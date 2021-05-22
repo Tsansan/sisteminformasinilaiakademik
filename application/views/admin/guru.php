@@ -11,7 +11,7 @@
                                         <div class="card-name">Guru</div>
                                     </div>
                                     <div class="col-2">
-                                        <a href="<?php echo site_url('admin/guru?add=guru') ?>" class="btn btn-primary btn-sm" role="button">Tambah</a>
+                                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#tambahModal">Tambah</button>
                                     </div>
                                 </div>
                             </div>
@@ -65,3 +65,76 @@
                 </div>
             </div>
             <!-- Akhir ISI Utama -->
+            <!-- modal -->
+            <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <form action="<?php echo site_url('admin/guru?add=guru') ?>" method="post">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="exampleModalLabel">Tambah Siswa</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="input-group mb-3">
+                                    <input type="hidden" name="id_guru" value="">
+                                    <div class="col-md-12">
+                                        <label for="induk" class="form-label">NIP</label>
+                                        <input type="text" class="form-control" id="induk" name="induk" value="">
+                                    </div>
+                                    <div class="col-md-12">
+                                        <label for="nama" class="form-label">Nama</label>
+                                        <input type="text" class="form-control" id="nama" name="nama" value="">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="ttl" class="form-label">Tempat Tanggal Lahir</label>
+                                        <div class="row">
+                                            <div class="col-8">
+                                                <input type="text" class="form-control" id="ttl" name="tempat_lahir" value="">
+                                            </div>
+                                            <div class="col-4">
+                                                <input type="date" class="form-control" id="ttl" name="tanggal_lahir" value="">
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label" for="jeniskelamin">Jenis Kelamin</label>
+                                        <select class="form-select" id="jeniskelamin" name="jeniskelamin">
+                                            <option selected value=""></option>
+                                            <option value="laki-laki">Laki-Laki</option>
+                                            <option value="perempuan">Perempuan</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label class="form-label" for="agama">Agama</label>
+                                        <select class="form-select" id="agama" name="agama">
+                                            <option selected value="">...</option>
+                                            <option value="islam">Islam</option>
+                                            <option value="kristen protestan">Kristen Protestan</option>
+                                            <option value="kristen katolik">Kristen Katolik</option>
+                                            <option value="hindu">Hindu</option>
+                                            <option value="buddha">Buddha</option>
+                                            <option value="konghucu">Konghucu</option>
+                                        </select>
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="alamat" class="form-label">Alamat</label>
+                                        <input type="text" id="alamat" class="form-control" name="alamat" value="">
+                                    </div>
+                                    <div class="col-12">
+                                        <label for="telp" class="form-label">Telp</label>
+                                        <input type="text" class="form-control" id="telp" name="telp" value="">
+                                    </div>
+                                    <input type="hidden" name="foto" value="default.jpg">
+                                    <input type="hidden" name="ttd" value="default.jpg">
+
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Tambah</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <!-- akhir modal -->

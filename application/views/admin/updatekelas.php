@@ -20,7 +20,7 @@
                                     <input type="hidden" name="id_kelas" value="<?php echo $kelass['id_kelas'] ?>">
                                     <div class="col-md-7">
                                         <label for="Tahun" class="form-label">Tahun</label>
-                                        <input type="number" class="form-control" id="induk" name="induk" value="<?php echo $kelass['tahun'] ?>">
+                                        <input type="number" class="form-control" id="tahun" name="tahun" value="<?php echo $kelass['tahun'] ?>">
                                     </div>
                                     <div class="col-md-7">
                                         <label for="kelas" class="form-label">Kelas</label>
@@ -29,11 +29,10 @@
                                     <div class="col-md-7">
                                         <label class="form-label" for="walikelas">Walikelas</label>
                                         <select class="form-select" id="walikelas" name="walikelas">
+                                            <option selected>...</option>
                                             <?php foreach ($gurus as $guru) : ?>
-                                                <?php if ($kelass['walikelas'] == $guru['id_guru']) : ?>
+                                                <?php if ($guru['id_guru'] == $kelass['walikelas']) : ?>
                                                     <option selected value="<?php echo $guru['id_guru'] ?>"><?php echo $guru['nama'] ?></option>
-                                                <?php elseif ($kelass['walikelas'] == null) : ?>
-                                                    <option value="">...</option>
                                                 <?php else : ?>
                                                     <option value="<?php echo $guru['id_guru'] ?>"><?php echo $guru['nama'] ?></option>
                                                 <?php endif; ?>

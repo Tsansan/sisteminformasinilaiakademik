@@ -8,7 +8,7 @@
                             <div class="card-header ">
                                 <div class="row">
                                     <div class="col-10">
-                                        <div class="card-name">Kelas</div>
+                                        <div class="card-name">Siswa</div>
                                     </div>
                                     <div class="col-2">
                                         <a href="<?php echo site_url('admin/siswa?add=siswa') ?>" class="btn btn-primary btn-sm" role="button">Tambah</a>

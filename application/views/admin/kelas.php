@@ -36,7 +36,7 @@
                                                     <td><?php echo $kelas['kelas']; ?></td>
                                                     <td>
                                                         <?php foreach ($walikelass as $walikelas) : ?>
-                                                            <?php if ($kelas['walikelas'] == $walikelas['id_guru']) : ?>
+                                                            <?php if ($walikelas['id_guru'] == $kelas['walikelas']) : ?>
                                                                 <?php echo $walikelas['nama']; ?>
                                                             <?php endif; ?>
                                                         <?php endforeach; ?>

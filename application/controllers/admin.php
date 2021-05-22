@@ -38,12 +38,22 @@ class admin extends CI_Controller
     public function kelas()
     {
 
+        $addkelas       = $this->input->get('add');
+        $bacakelas      = $this->input->get('read');
+        $update         = $this->input->get('update');
+        $deletekelas    = $this->input->get('delete');
 
-        $bacakelas = $this->input->get('read');
-        $update = $this->input->get('update');
+        if ($addkelas == 'add') {
+
+            if ($_POST != null) {
+                $this->Admin_model->input_kelas($_POST);
+                redirect('admin/kelas');
+            }
+        }
+
 
         //Lihat Siswa
-        if ($bacakelas != null) {
+        elseif ($bacakelas != null) {
 
             //add siswa
             if ($_POST != null) {
@@ -83,14 +93,20 @@ class admin extends CI_Controller
 
             print_r($data['kelass']);
             echo "<br>";
-            print_r($update);
+            print_r($data['gurus']);
             $this->load->view('admin/auth/header', $data);
             $this->load->view('admin/auth/sidebar');
             $this->load->view('admin/updatekelas');
             $this->load->view('admin/auth/footer');
+        }
+
+        // delete
+        elseif ($deletekelas != null) {
+            $this->Admin_model->delete_kelas($deletekelas);
+            redirect('admin/kelas');
         } else {
             $data['kelass'] = $this->Admin_model->data_kelas()->result_array();
-            $data['walikelass'] = $this->Admin_model->data_walikelas()->result_array();
+            $data['walikelass'] = $this->Admin_model->data_guru()->result_array();
 
             $this->load->view('admin/auth/header', $data);
             $this->load->view('admin/auth/sidebar');
@@ -128,7 +144,7 @@ class admin extends CI_Controller
                 $this->Admin_model->update_guru($id);
                 redirect('admin/guru');
             }
-            $data['gurus'] = $this->Admin_model->data_guru($update)->row_array();
+            $data['gurus'] = $this->Admin_model->data_guru(null, $update)->row_array();
 
             $this->load->view('admin/auth/header', $data);
             $this->load->view('admin/auth/sidebar');
@@ -167,9 +183,11 @@ class admin extends CI_Controller
 
     public function siswa()
     {
+        $update = $this->input->get('update');
+        $add = $this->input->get('add');
+        $delete = $this->input->get('delete');
 
         // Update
-        $update = $this->input->get('update');
         if ($update != null) {
 
 
@@ -187,8 +205,7 @@ class admin extends CI_Controller
         }
 
         // Add
-        $add = $this->input->get('add');
-        if ($add != null) {
+        elseif ($add != null) {
 
             if ($_POST) {
                 $this->Admin_model->input_siswa($_POST);
@@ -202,12 +219,22 @@ class admin extends CI_Controller
             $this->load->view('admin/auth/footer');
         }
 
+        //delete
+        elseif ($delete != null) {
+            $this->Admin_model->delete_siswa($delete);
+            redirect('admin/siswa');
+        }
 
-        $data['siswas'] = $this->Admin_model->data_siswa()->result_array();
 
-        $this->load->view('admin/auth/header', $data,);
-        $this->load->view('admin/auth/sidebar');
-        $this->load->view('admin/siswa');
-        $this->load->view('admin/auth/footer');
+        // utama
+        else {
+
+            $data['siswas'] = $this->Admin_model->data_siswa()->result_array();
+
+            $this->load->view('admin/auth/header', $data,);
+            $this->load->view('admin/auth/sidebar');
+            $this->load->view('admin/siswa');
+            $this->load->view('admin/auth/footer');
+        }
     }
 }

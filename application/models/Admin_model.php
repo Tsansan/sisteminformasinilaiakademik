@@ -43,12 +43,17 @@ class Admin_model extends CI_Model
     }
 
 
-    public function input_kelas($id_kelas = null)
+    public function input_kelas($data)
     {
 
-        $query = "INSERT INTO tb_kelas Values $id_kelas";
+        $data1 = [
+            'id_kelas'  => '',
+            'tahun'     => $data['tahun'],
+            'kelas'     => $data['kelas'],
+            'walikelas' => $data['walikelas']
+        ];
 
-        $this->db->query($query);
+        $this->db->insert('tb_kelas', $data1);
     }
 
     public function update_kelas($data)
@@ -57,7 +62,7 @@ class Admin_model extends CI_Model
         $data1 = [
 
             'id_kelas'  => $data['id_kelas'],
-            'tahun'     => date('Y'),
+            'tahun'     => $data['tahun'],
             'kelas'     => $data['kelas'],
             'walikelas' => $data['walikelas']
         ];
@@ -98,7 +103,7 @@ class Admin_model extends CI_Model
 
 
     // guru
-    public function data_guru($idguru = null)
+    public function data_guru($idguru = null, $update = null)
     {
 
         if ($idguru != null) {
@@ -106,6 +111,9 @@ class Admin_model extends CI_Model
             INNER JOIN  tb_guru ON tb_guru.id_guru = tb_mengajar.id_guru 
             INNER JOIN tb_kelas ON tb_kelas.id_kelas = tb_mengajar.id_kelas
             WHERE tb_mengajar.id_guru = $idguru";
+        } elseif ($update != null) {
+            $query = "SELECT * FROM tb_guru 
+            WHERE id_guru = $update";
         } else {
             $query = "SELECT * FROM tb_guru";
         }
@@ -269,8 +277,8 @@ class Admin_model extends CI_Model
 
     public function delete_siswa($data)
     {
-        $id = $data['id'];
-        $query = "DELETE FROM tb_siswa WHERE id_siswa = $id";
+
+        $query = "DELETE FROM tb_siswa WHERE id_siswa = $data";
 
         $this->db->query($query);
     }
