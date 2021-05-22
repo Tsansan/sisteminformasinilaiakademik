@@ -23,13 +23,14 @@ class guru extends CI_Controller
     {
         parent::__construct();
         $this->load->library('form_validation');
-        $this->load->model('guru_model');
+        $this->load->model('Guru_model');
     }
 
     public function index()
     {
-        $data['biodatas'] = $this->guru_model->data_guru($this->session->userdata('induk'))->row_array();
+        $data['biodatas'] = $this->Guru_model->data_guru($this->session->userdata('induk'))->row_array();
 
+        print_r($data['biodatas']);
         $this->load->view('guru/auth/header', $data);
         $this->load->view('guru/auth/sidebar');
         $this->load->view('guru/guru');
@@ -39,7 +40,9 @@ class guru extends CI_Controller
     public function kelas()
     {
         // mengambil data kelas baik siswa dan kelasnya
-        $data['kelas'] = "";
+        $data['kelas'] = $this->Guru_model->kelas()->result_array();
+
+        print_r($data['kelas']);
 
         $this->load->view('guru/auth/header', $data);
         $this->load->view('guru/auth/sidebar');

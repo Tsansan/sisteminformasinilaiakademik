@@ -4,6 +4,20 @@ class Guru_model extends CI_Model
 {
 
 
+    public function data_guru($idguru)
+    {
+
+        $query = "SELECT * FROM tb_guru";
+
+
+        if ($idguru != null) {
+            $query = "SELECT * FROM tb_guru 
+                    WHERE induk = $idguru";
+        }
+
+        $data = $this->db->query($query);
+        return $data;
+    }
 
     public function kelas($idkelas = null)
     {
