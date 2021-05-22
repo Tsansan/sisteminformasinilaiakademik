@@ -1,6 +1,6 @@
     <!-- Isi -->
 
-    <div class="container-fluid body">
+    <div class="container-fluid my-auto">
         <div class="row">
 
             <!-- Sidebar -->

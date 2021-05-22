@@ -2,27 +2,21 @@
 
 class Guru_model extends CI_Model
 {
-    public function data_guru($induk)
+
+
+
+    public function kelas($idkelas = null)
     {
-
-        $query = "SELECT * FROM tb_guru WHERE induk = '$induk'";
-
-        $data = $this->db->query($query);
-        return $data;
-    }
-
-    public function induksiswa($induk)
-    {
-
-        $query = "SELECT * FROM tb_siswa WHERE induk = '$induk'";
-
-        $data = $this->db->query($query);
-        return $data;
-    }
-
-    public function kelas($induk)
-    {
-        $query = "SELECT * FROM tb_guru FULL OUTER JOIN tb_nilaimapel ON tb_guru.id_guru = tb_nilaimapel.id_nilaimapel ";
+        $query = "SELECT * FROM tb_absen 
+                    INNER JOIN tb_kelas ON tb_kelas.id_kelas = tb_absen.id_kelas
+                    INNER JOIN tb_siswa ON tb_siswa.id_siswa = tb_absen.id_siswa
+                    ";
+        if ($idkelas != null) {
+            $query = "SELECT * FROM tb_absen 
+            INNER JOIN tb_kelas ON tb_kelas.id_kelas = tb_absen.id_kelas
+            INNER JOIN tb_siswa ON tb_siswa.id_siswa = tb_absen.id_siswa
+            WHERE tb_absen.id_kelas= $idkelas";
+        }
 
         $data = $this->db->query($query);
         return $data;

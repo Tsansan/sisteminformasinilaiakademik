@@ -44,10 +44,9 @@
 }
 
 
-/* Sidebar Guru */
+/* Sidebar*/
 .sidebar {
 	background-color: #ffffff;
-	position: relative;
 	color: #494949;
 	border-right: #ececee groove;
 }

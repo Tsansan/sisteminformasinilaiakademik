@@ -1,6 +1,6 @@
             <!-- Isi Utama -->
             <div class="col-lg-10 isi-guru">
-                <div class="container-fluid" style="height: 50000px;">
+                <div class="container-fluid">
                     <div class="pt-5">
 
                         <!-- Card  Dashboard-->
