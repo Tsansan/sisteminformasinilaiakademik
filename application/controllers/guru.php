@@ -41,11 +41,19 @@ class guru extends CI_Controller
     {
         // mengambil data kelas baik siswa dan kelasnya
         $data['kelass'] = $this->Guru_model->kelas()->result_array();
-
-        print_r($data['kelass']);
         $this->load->view('guru/auth/header', $data);
         $this->load->view('guru/auth/sidebar');
         $this->load->view('guru/gurukelas');
         $this->load->view('guru/auth/footer');
+    }
+
+    public function ajaxkelassiswa()
+    {
+        if ($_GET['carikelas'] == null) {
+            echo "<p> Silahkan pilih kelas</p>";
+        } else {
+            $data['kelass'] = $this->Guru_model->kelas($_GET['carikelas'])->result_array();
+            $this->load->view('guru/gurukelassiswa', $data);
+        }
     }
 }
