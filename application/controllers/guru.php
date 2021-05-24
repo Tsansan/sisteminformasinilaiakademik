@@ -40,10 +40,9 @@ class guru extends CI_Controller
     public function kelas()
     {
         // mengambil data kelas baik siswa dan kelasnya
-        $data['kelas'] = $this->Guru_model->kelas()->result_array();
+        $data['kelass'] = $this->Guru_model->kelas()->result_array();
 
-        print_r($data['kelas']);
-
+        print_r($data['kelass']);
         $this->load->view('guru/auth/header', $data);
         $this->load->view('guru/auth/sidebar');
         $this->load->view('guru/gurukelas');

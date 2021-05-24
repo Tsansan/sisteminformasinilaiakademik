@@ -24,6 +24,7 @@ class Guru_model extends CI_Model
         $query = "SELECT * FROM tb_absen 
                     INNER JOIN tb_kelas ON tb_kelas.id_kelas = tb_absen.id_kelas
                     INNER JOIN tb_siswa ON tb_siswa.id_siswa = tb_absen.id_siswa
+                    GROUP BY kelas
                     ";
         if ($idkelas != null) {
             $query = "SELECT * FROM tb_absen 
