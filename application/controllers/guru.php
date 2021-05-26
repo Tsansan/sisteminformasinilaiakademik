@@ -56,4 +56,25 @@ class guru extends CI_Controller
             $this->load->view('guru/gurukelassiswa', $data);
         }
     }
+
+    public function nilaisiswa()
+    {
+        $data['kelass'] = $this->Guru_model->kelas()->result_array();
+        $this->load->view('guru/auth/header', $data);
+        $this->load->view('guru/auth/sidebar');
+        $this->load->view('guru/gurukelassiswanilai');
+        $this->load->view('guru/auth/footer');
+    }
+
+    public function masukkannilaisiswa()
+    {
+        echo "nilai";
+        print_r($_POST['nilai']);
+        echo "<br>";
+        echo "predikat";
+        print_r($_POST['predikat']);
+        echo "<br>";
+        echo "deskripsi";
+        print_r($_POST['deskripsi']);
+    }
 }

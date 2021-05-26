@@ -1,35 +1,41 @@
-<table>
-    <table class="table my-3">
-        <thead>
+<label for="inputEmail3" class="col-sm-3 col-form-label-lg ms-3 pt-2">Masukkan NIlai?</label>
+<?php foreach ($kelass as $kelas) : ?>
+    <a type="button" href="<?php echo site_url('guru/nilaisiswa') . "?kelas=" . $kelas['id_kelas'] . "&nilai=pengetahuan" ?>" class="col-sm-2 btn btn-primary ms-3 mt-1">Pengetahuan</a>
+    <a type="button" href="<?php echo site_url('guru/nilaisiswa') . "?kelas=" . $kelas['id_kelas'] . "&nilai=keterampilan" ?>" class="col-sm-2 btn btn-primary ms-3 mt-1">Keterampilan</a>
+<?php endforeach; ?>
+
+
+<table class="table my-3">
+    <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nama</th>
+            <th scope="col">Nilai</th>
+            <th scope="col">NISN</th>
+            <th scope="col">Aksi</th>
+        </tr>
+    </thead>
+    <tbody>
+        <?php $no = 1;
+        foreach ($kelass as $kelas) : ?>
             <tr>
-                <th scope="col">#</th>
-                <th scope="col">Nama</th>
-                <th scope="col">Status</th>
-                <th scope="col">Aksi</th>
+                <th scope="row"><?php echo $no++ ?></th>
+                <td class="nama-nilai"><?php echo $kelas['nama']; ?></td>
+                <td><?php echo $kelas['induk'] ?></td>
+                <td><?php echo $kelas['nisn'] ?></td>
+                <td>
+                    <div class="dropdown">
+                        <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                            Lihat Nilai
+                        </button>
+                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                            <li><input type="button" class="dropdown-item" href="#" id="aksi">aksi</input></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            <?php $no = 1;
-            foreach ($kelass as $kelas) : ?>
-                <tr>
-                    <th scope="row"><?php echo $no++ ?></th>
-                    <td class="nama-nilai"><?php echo $kelas['nama']; ?></td>
-                    <td>
-                        <div class="status-nilai">Lengkap</div>
-                    </td>
-                    <td>
-                        <!-- split button -->
-                        <div class="btn-group aksi-nilai">
-                            <button type="button" class="btn dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown" aria-expanded="false">
-                                <span class="visually-hidden">Toggle Dropdown</span>
-                            </button>
-                            <ul class="dropdown-menu">
-                                <li><a class="dropdown-item" href="<?php echo site_url('guru/nilaisiswa?idsiswa=') . $kelas['id_siswa'] ?>"> lihat Nilai</a></li>
-                            </ul>
-                        </div>
-                        <!-- Split button -->
-                    </td>
-                </tr>
-            <?php endforeach; ?>
-        </tbody>
-    </table>
+        <?php endforeach; ?>
+    </tbody>
+</table>
