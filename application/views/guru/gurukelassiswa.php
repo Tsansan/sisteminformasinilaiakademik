@@ -1,8 +1,8 @@
 <label for="inputEmail3" class="col-sm-3 col-form-label-lg ms-3 pt-2">Masukkan NIlai?</label>
-<?php foreach ($kelass as $kelas) : ?>
-    <a type="button" href="<?php echo site_url('guru/nilaisiswa') . "?kelas=" . $kelas['id_kelas'] . "&nilai=pengetahuan" ?>" class="col-sm-2 btn btn-primary ms-3 mt-1">Pengetahuan</a>
-    <a type="button" href="<?php echo site_url('guru/nilaisiswa') . "?kelas=" . $kelas['id_kelas'] . "&nilai=keterampilan" ?>" class="col-sm-2 btn btn-primary ms-3 mt-1">Keterampilan</a>
-<?php endforeach; ?>
+
+<a type="button" href="<?php echo site_url('guru/nilaisiswa') . "?kelas=" . $kelass[0]['id_kelas'] . "&nilai=pengetahuan" ?>" class="col-sm-2 btn btn-primary ms-3 mt-1">Pengetahuan</a>
+<a type="button" href="<?php echo site_url('guru/nilaisiswa') . "?kelas=" . $kelass[0]['id_kelas'] . "&nilai=keterampilan" ?>" class="col-sm-2 btn btn-primary ms-3 mt-1">Keterampilan</a>
+
 
 
 <table class="table my-3">

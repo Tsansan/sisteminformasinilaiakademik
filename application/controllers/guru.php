@@ -53,13 +53,15 @@ class guru extends CI_Controller
             echo "<p> Silahkan pilih kelas</p>";
         } else {
             $data['kelass'] = $this->Guru_model->kelas($_GET['carikelas'])->result_array();
+            print_r($data['kelass']);
             $this->load->view('guru/gurukelassiswa', $data);
         }
     }
 
     public function nilaisiswa()
     {
-        $data['kelass'] = $this->Guru_model->kelas()->result_array();
+        $data['kelass'] = $this->Guru_model->kelas($_GET['kelas'])->result_array();
+        print_r($data['kelass']);
         $this->load->view('guru/auth/header', $data);
         $this->load->view('guru/auth/sidebar');
         $this->load->view('guru/gurukelassiswanilai');
@@ -76,5 +78,14 @@ class guru extends CI_Controller
         echo "<br>";
         echo "deskripsi";
         print_r($_POST['deskripsi']);
+
+
+
+        for ($i = 0; $i < $_POST['jumlah']; $i++) {
+
+            if ($_POST['nilai'][$i] < $_POST['kkm']) {
+                $nilai['predikat'][$i] =  "";
+            }
+        }
     }
 }

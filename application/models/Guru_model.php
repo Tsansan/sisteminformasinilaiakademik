@@ -36,4 +36,8 @@ class Guru_model extends CI_Model
         $data = $this->db->query($query);
         return $data;
     }
+
+    public function inputnilai($nilai, $predikat, $deskripsi)
+    {
+    }
 }

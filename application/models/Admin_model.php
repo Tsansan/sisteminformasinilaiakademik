@@ -94,8 +94,6 @@ class Admin_model extends CI_Model
             'id_absen'  => '',
             'id_kelas'  => $data['kelas'],
             'id_siswa'  => $data['siswa'],
-            'id_nilai1' => '',
-            'id_nilai1' => ''
         ];
 
         $this->db->insert('tb_absen', $data1);
