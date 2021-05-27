@@ -21,7 +21,7 @@
                             <div class="row mb-3 ms-3">
                                 <label for="kkm" class="col-sm-2 col-form-label col-form-label-sm">KKM</label>
                                 <div class="col-sm-2">
-                                    <input type="text" class="form-control form-control-sm" id="kkm">
+                                    <input type="text" class="form-control form-control-sm" name="kkm" id="kkm">
                                 </div>
                             </div>
                             <table class="table my-3">
@@ -30,29 +30,37 @@
                                         <th scope="col">#</th>
                                         <th scope="col">Nama</th>
                                         <th class="col" scope="col">NIlai</th>
-                                        <th class="col" scope="col">predikat</th>
                                         <th class="col" scope="col">Deskripsi</th>
                                     </tr>
                                 </thead>
                                 <tbody>
                                     <?php $no = 1;
+
+                                    $nilaimapel = 1;
+                                    $id_absen = 1;
+                                    $jenisnilai = 1;
+                                    $id_mapel = 1;
                                     $nilai = 1;
-                                    $predikat = 1;
                                     $deskripsi = 1;
+                                    $predikat = 1;
+                                    $id_guru = 1;
+
                                     $jumlah = 1;
                                     foreach ($kelass as $kelas) : ?>
                                         <tr>
                                             <th scope="row"><?php echo $no++ ?></th>
                                             <td class="col-sm-3"><?php echo $kelas['nama']; ?></td>
                                             <td class="col-sm-1">
-                                                <input type="number" class="form-control col-sm-2" id="nilai" name="nilai[<?php echo $nilai++; ?>]" placeholder="Nilai">
-                                            </td>
-                                            <td class="col-sm-1">
-                                                <input type="text" class="form-control col-sm-2" id="predikat" name="predikat[<?php echo $predikat++; ?>]" readonly>
+                                                <input type="hidden" name="idnilaimapel[<?php echo $nilaimapel++ ?>]" value="">
+                                                <input type="hidden" name="idabsen[<?php echo $id_absen++ ?>]" value="<?php echo $kelas['id_absen']; ?>">
+                                                <input type="hidden" name="jenis[<?php echo $jenisnilai++ ?>]" value="<?php echo $jenis ?>">
+                                                <input type="hidden" name="mapel[<?php echo $id_mapel++ ?>]" value="<?php echo $mengajars[0]['id_mapel'] ?>">
+                                                <input type="hidden" name="idguru[<?php echo $id_guru++ ?>]" value="<?php echo $mengajars[0]['id_guru'] ?>">
+                                                <input type="number" class="form-control col-sm-2" id="nilai" name="nilai[<?php echo $nilai++; ?>]">
                                             </td>
                                             <td>
                                                 <textarea class="form-control col-sm-5" name="deskripsi[<?php echo $deskripsi++; ?>]" aria-label="With textarea"></textarea>
-                                                <input type="hidden" name="" id="jumlah" value="<?php echo $jumlah++ ?>">
+                                                <input type="hidden" name="jumlah" id="jumlah" value="<?php echo $jumlah++ ?>">
                                             </td>
                                         </tr>
                                     <?php endforeach; ?>
