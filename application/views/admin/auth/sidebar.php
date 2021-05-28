@@ -26,6 +26,11 @@
                         </li>
                         <li>
                             <div type="button">
+                                <a href="<?php echo site_url('admin/mengajar') ?>">Mengajar</a>
+                            </div>
+                        </li>
+                        <li>
+                            <div type="button">
                                 <a href="<?php echo site_url('rapot/logout') ?>">Log out</a>
                             </div>
                         </li>

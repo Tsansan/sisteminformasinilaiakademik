@@ -48,17 +48,7 @@ class guru extends CI_Controller
         $this->load->view('guru/auth/footer');
     }
 
-    public function ajaxkelassiswa()
-    {
-        if ($_GET['carikelas'] == null) {
-            echo "<p> Silahkan pilih kelas</p>";
-        } else {
-            $data['kelass'] = $this->Guru_model->kelas($_GET['carikelas'])->result_array();
-            $this->load->view('guru/gurukelassiswa', $data);
-        }
-    }
-
-    public function nilaisiswa()
+    public function inputnilaisiswa()
     {
         $data['mengajars'] = $this->Guru_model->mengajar($this->session->userdata('id_guru'), $_GET['kelas'])->result_array();
         $data['kelass'] = $this->Guru_model->kelas($_GET['kelas'])->result_array();
@@ -66,11 +56,54 @@ class guru extends CI_Controller
         print_r($data['mengajars']);
         $this->load->view('guru/auth/header', $data);
         $this->load->view('guru/auth/sidebar');
-        $this->load->view('guru/gurukelassiswanilai');
+        $this->load->view('guru/inputnilaisiswa');
         $this->load->view('guru/auth/footer');
     }
 
     public function masukkannilaisiswa()
+    {
+
+        $kkm = $this->Guru_model->mengajar($this->session->userdata('id_guru'), $_POST['kelas'])->row_array();
+
+        $ambilpredikat = $this->db->get_where('tb_predikat', ['kkm' => $kkm])->result_array();
+        for ($a = 0; $a <= 3; $a++) {
+            $predikat[$a] = explode('-', $ambilpredikat[$a]['nilai']);
+        }
+
+        $idnilaimapel   = $_POST['idnilaimapel'];
+        $id_absen       = $_POST['idabsen'];
+        $jenis          = $_POST['jenis'];
+        $id_mapel       = $_POST['mapel'];
+        $nilai          = $_POST['nilai'];
+        $deskripsi      = $_POST['deskripsi'];
+        $id_guru        = $_POST['idguru'];
+        $jumlah         = $_POST['jumlah'];
+
+
+        for ($j = 1; $j <= $jumlah; $j++) {
+            for ($k = 0; $k <= 3; $k++) {
+                for ($i = $predikat[$k][0]; $i <= $predikat[$k][1]; $i++) {
+                    if ($nilai[$j] == $i) {
+                        $predikatmasuk[$j] = $ambilpredikat[$k]['id_predikat'];
+                    }
+                }
+            }
+        }
+
+        $inputnilai = [$idnilaimapel, $id_absen, $jenis, $id_mapel, $nilai, $deskripsi, $predikatmasuk, $id_guru];
+
+
+
+        for ($i = 1; $i <= $jumlah; $i++) {
+            $ids[$i] = array_column($inputnilai, $i);
+        }
+
+        $this->Guru_model->inputnilai($ids, $jumlah);
+        redirect('guru/kelas');
+    }
+
+
+    public function updatenilaisiswa()
     {
 
         $ambilpredikat = $this->db->get_where('tb_predikat', ['kkm' => $_POST['kkm']])->result_array();
@@ -106,7 +139,45 @@ class guru extends CI_Controller
             $ids[$i] = array_column($inputnilai, $i);
         }
 
-        $this->Guru_model->inputnilai($ids, $jumlah);
-        redirect('guru/kelas');
+        $this->Guru_model->updatenilai($ids, $jumlah);
+        redirect('guru/lihatnilaisiswa');
+    }
+
+
+    public function lihatnilaisiswa()
+    {
+        $data['kelass'] = $this->Guru_model->mengajar($this->session->userdata('id_guru'))->result_array();
+
+        print_r($data['kelass']);
+        $this->load->view('guru/auth/header', $data);
+        $this->load->view('guru/auth/sidebar');
+        $this->load->view('guru/lihatnilaisiswa');
+        $this->load->view('guru/auth/footer');
+    }
+
+
+
+
+    // ajax
+
+    public function ajaxkelassiswa()
+    {
+        if ($_GET['carikelas'] == null) {
+            echo "<p> Silahkan pilih kelas</p>";
+        } else {
+            $data['kelass'] = $this->Guru_model->kelas($_GET['carikelas'])->result_array();
+            $this->load->view('guru/ajaxkelas', $data);
+        }
+    }
+
+    public function ajaxlihatnilaisiswa()
+    {
+        $data['kelass'] = $this->Guru_model->lihatnilai($_GET['kelas'], $_GET['jenis'])->result_array();
+        $this->load->view('guru/ajaxlihatnilaisiswa', $data);
+    }
+    public function ajaxeditnilaisiswa()
+    {
+        $data['kelass'] = $this->Guru_model->lihatnilai($_GET['kelas'], $_GET['jenis'])->result_array();
+        $this->load->view('guru/ajaxeditnilaisiswa', $data);
     }
 }

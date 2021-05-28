@@ -18,12 +18,6 @@
                     <!-- Daftar nama -->
                     <div id="daftarnama">
                         <form action="<?php echo site_url('guru/masukkannilaisiswa') ?>" method="post">
-                            <div class="row mb-3 ms-3">
-                                <label for="kkm" class="col-sm-2 col-form-label col-form-label-sm">KKM</label>
-                                <div class="col-sm-2">
-                                    <input type="text" class="form-control form-control-sm" name="kkm" id="kkm">
-                                </div>
-                            </div>
                             <table class="table my-3">
                                 <thead>
                                     <tr>

@@ -237,4 +237,15 @@ class admin extends CI_Controller
             $this->load->view('admin/auth/footer');
         }
     }
+
+    public function mengajar()
+    {
+        $data['mengajar'] = $this->Admin_model->mengajar()->result_array();
+        for ($i = 0; $i < 9; $i++) {
+            print_r($data['mengajar'][$i]);
+            echo "<br>";
+            echo "<br>";
+            echo "<br>";
+        }
+    }
 }

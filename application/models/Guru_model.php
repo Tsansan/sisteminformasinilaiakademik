@@ -95,4 +95,49 @@ class Guru_model extends CI_Model
             $this->db->insert('tb_nilaimapel', $nilai);
         }
     }
+
+    public function updatenilai($data, $jumlahsiswa)
+    {
+        for ($i = 1; $i <= $jumlahsiswa; $i++) {
+            $nilai = [
+                'id_nilaimapel'     => $data[$i][0],
+                'id_absen'          => $data[$i][1],
+                'jenis'             => $data[$i][2],
+                'id_mapel'          => $data[$i][3],
+                'nilai'             => $data[$i][4],
+                'id_desc'           => $data[$i][5],
+                'id_predikat'       => $data[$i][6],
+                'id_guru    '       => $data[$i][7]
+            ];
+
+            $this->db->update('tb_nilaimapel', $nilai, ['id_nilaimapel' => $nilai['id_nilaimapel']]);
+        }
+    }
+
+
+    public function lihatnilai($kelas = null, $jenis)
+    {
+        $query = "SELECT * FROM tb_absen
+                    INNER JOIN tb_nilaimapel ON tb_nilaimapel.id_absen = tb_absen.id_absen
+                    INNER JOIN tb_siswa ON tb_siswa.id_siswa = tb_absen.id_siswa
+                    GROUP BY tb_absen.id_kelas";
+
+        if ($kelas != null) {
+            if ($jenis == 'pengetahuan') {
+                $query = "SELECT * FROM tb_absen
+                INNER JOIN tb_nilaimapel ON tb_nilaimapel.id_absen = tb_absen.id_absen
+                INNER JOIN tb_siswa ON tb_siswa.id_siswa = tb_absen.id_siswa
+                WHERE tb_absen.id_kelas = $kelas AND tb_nilaimapel.jenis = '$jenis'";
+            } else
+            if ($jenis == 'keterampilan') {
+                $query = "SELECT * FROM tb_absen
+                INNER JOIN tb_nilaimapel ON tb_nilaimapel.id_absen = tb_absen.id_absen
+                INNER JOIN tb_siswa ON tb_siswa.id_siswa = tb_absen.id_siswa
+                WHERE tb_absen.id_kelas = $kelas AND tb_nilaimapel.jenis = '$jenis'";
+            }
+        }
+
+        $data = $this->db->query($query);
+        return $data;
+    }
 }
