@@ -170,6 +170,9 @@ class admin extends CI_Controller
         // kelas
         else {
             $data['mengajars'] = $this->Admin_model->mengajar()->result_array();
+            $data['mapels'] = $this->Admin_model->mapel()->result_array();
+            $data['kelass'] = $this->Admin_model->data_kelas()->result_array();
+
             // View
             $data['gurus'] = $this->Admin_model->data_guru()->result_array();
 
@@ -240,12 +243,50 @@ class admin extends CI_Controller
 
     public function mengajar()
     {
-        $data['mengajar'] = $this->Admin_model->mengajar()->result_array();
-        for ($i = 0; $i < 9; $i++) {
-            print_r($data['mengajar'][$i]);
-            echo "<br>";
-            echo "<br>";
-            echo "<br>";
+        $data['mengajars'] = $this->Admin_model->mengajar()->result_array();
+        $data['mapels'] = $this->Admin_model->mapel()->result_array();
+        $data['kelass'] = $this->Admin_model->data_kelas()->result_array();
+        $data['gurus'] = $this->Admin_model->data_guru()->result_array();
+
+        // 
+        // 
+        $this->load->view('admin/auth/header', $data,);
+        $this->load->view('admin/auth/sidebar');
+        $this->load->view('admin/mengajar');
+        $this->load->view('admin/auth/footer');
+    }
+
+    public function tambahmengajar()
+    {
+        $this->Admin_model->tambahmengajar($_POST);
+
+        if ($_GET['idguru'] != null) {
+            $idguru = $_GET['idguru'];
+            $link = "admin/updatemengajar?idguru=$idguru";
+            redirect($link);
         }
+        redirect('admin/mengajar');
+    }
+
+    public function updatemengajar()
+    {
+        $data['mengajars'] = $this->Admin_model->mengajar($_GET['idguru'])->result_array();
+        $data['gurus'] = $this->Admin_model->data_guru($_GET['idguru'])->row_array();
+        $data['mapels'] = $this->Admin_model->mapel()->result_array();
+        $data['kelass'] = $this->Admin_model->data_kelas()->result_array();
+
+        $this->load->view('admin/auth/header', $data,);
+        $this->load->view('admin/auth/sidebar');
+        $this->load->view('admin/updatemengajar');
+        $this->load->view('admin/auth/footer');
+    }
+
+    public function hapusmengajar()
+    {
+        print_r($_GET);
+        $this->Admin_model->delete_mengajar($_GET['idmengajar']);
+        $idguru = $_GET['idguru'];
+        $link = "admin/updatemengajar?idguru=$idguru";
+        redirect($link);
     }
 }

@@ -178,33 +178,6 @@ class Admin_model extends CI_Model
         $date['year'] = date('Y');
 
 
-        if ($date['mount'] == 01 || $date['mount'] ==  02 || $date['mount'] ==  03 || $date['mount'] ==  04 || $date['mount'] ==  05 || $date['mount'] ==  06) {
-            $year = $date['year'] - 1;
-            $query = "SELECT * FROM tb_mengajar 
-            INNER JOIN tb_kelas ON tb_kelas.id_kelas = tb_mengajar.id_kelas
-            INNER JOIN tb_guru ON tb_guru.id_guru = tb_mengajar.id_guru
-            INNER JOIN tb_mapel ON tb_mapel.id_mapel = tb_mengajar.id_mapel
-            INNER JOIN tb_predikat ON tb_predikat.id_predikat = tb_mengajar.id_predikat
-            WHERE tb_mengajar.tahun = $year";
-
-            $mengajar = $this->db->query($query);
-
-            return $mengajar;
-        } else if ($date['mount'] == '07' || $date['mount'] ==  '08' || $date['mount'] ==  '09' || $date['mount'] ==  '10' || $date['mount'] ==  '11' || $date['mount'] ==  '12') {
-            $year = $date['year'];
-            $query = "SELECT * FROM tb_mengajar 
-            INNER JOIN tb_kelas ON tb_kelas.id_kelas = tb_mengajar.id_kelas
-            INNER JOIN tb_guru ON tb_guru.id_guru = tb_mengajar.id_guru
-            INNER JOIN tb_mapel ON tb_mapel.id_mapel = tb_mengajar.id_mapel
-            INNER JOIN tb_predikat ON tb_predikat.id_predikat = tb_mengajar.id_predikat
-            WHERE tb_mengajar.tahun = $year";
-
-            $mengajar = $this->db->query($query);
-
-            return $mengajar;
-        }
-
-
         if ($idguru != null) {
             if ($date['mount'] == 01 || $date['mount'] ==  02 || $date['mount'] ==  03 || $date['mount'] ==  04 || $date['mount'] ==  05 || $date['mount'] ==  06) {
                 $year = $date['year'] - 1;
@@ -231,6 +204,32 @@ class Admin_model extends CI_Model
 
                 return $mengajar;
             }
+        }
+
+        if ($date['mount'] == 01 || $date['mount'] ==  02 || $date['mount'] ==  03 || $date['mount'] ==  04 || $date['mount'] ==  05 || $date['mount'] ==  06) {
+            $year = $date['year'] - 1;
+            $query = "SELECT * FROM tb_mengajar 
+            INNER JOIN tb_kelas ON tb_kelas.id_kelas = tb_mengajar.id_kelas
+            INNER JOIN tb_guru ON tb_guru.id_guru = tb_mengajar.id_guru
+            INNER JOIN tb_mapel ON tb_mapel.id_mapel = tb_mengajar.id_mapel
+            INNER JOIN tb_predikat ON tb_predikat.id_predikat = tb_mengajar.id_predikat
+            WHERE tb_mengajar.tahun = $year";
+
+            $mengajar = $this->db->query($query);
+
+            return $mengajar;
+        } else if ($date['mount'] == '07' || $date['mount'] ==  '08' || $date['mount'] ==  '09' || $date['mount'] ==  '10' || $date['mount'] ==  '11' || $date['mount'] ==  '12') {
+            $year = $date['year'];
+            $query = "SELECT * FROM tb_mengajar 
+            INNER JOIN tb_kelas ON tb_kelas.id_kelas = tb_mengajar.id_kelas
+            INNER JOIN tb_guru ON tb_guru.id_guru = tb_mengajar.id_guru
+            INNER JOIN tb_mapel ON tb_mapel.id_mapel = tb_mengajar.id_mapel
+            INNER JOIN tb_predikat ON tb_predikat.id_predikat = tb_mengajar.id_predikat
+            WHERE tb_mengajar.tahun = $year";
+
+            $mengajar = $this->db->query($query);
+
+            return $mengajar;
         }
     }
 
@@ -311,24 +310,40 @@ class Admin_model extends CI_Model
         $this->db->query($query);
     }
 
-    // public function mengajar($idguru = null)
-    // {
 
-    //     $query = "SELECT * FROM tb_mengajar 
-    //                 INNER JOIN tb_kelas ON tb_kelas.id_kelas = tb_mengajar.id_kelas
-    //                 INNER JOIN tb_guru ON tb_guru.id_guru = tb_mengajar.id_guru
-    //                 INNER JOIN tb_mapel ON tb_mapel.id_mapel = tb_mengajar.id_mapel
-    //                 INNER JOIN tb_predikat ON tb_predikat.id_predikat = tb_mengajar.id_predikat
-    //                 ";
-    //     if ($idguru != null) {
-    //         $query = "SELECT * FROM tb_mengajar 
-    //                 INNER JOIN tb_kelas ON tb_kelas.id_kelas = tb_mengajar.id_kelas
-    //                 INNER JOIN tb_guru ON tb_guru.id_guru = tb_mengajar.id_guru
-    //                 INNER JOIN tb_mapel ON tb_mapel.id_mapel = tb_mengajar.id_mapel
-    //                 INNER JOIN tb_predikat ON tb_predikat.id_predikat = tb_mengajar.id_predikat
-    //                 WHERE tb_mengajar.id_guru = $idguru";
-    //     }
-    //     $data = $this->db->query($query);
-    //     return $data;
-    // }
+
+    public function mapel()
+    {
+        $query = "SELECT * FROM tb_mapel";
+
+        $data = $this->db->query($query);
+        return $data;
+    }
+
+    public function tambahmengajar()
+    {
+        if (date('m') == 01 || date('m') == 02 || date('m') == 03 || date('m') == 04 || date('m') == 05 || date('m') == 06) {
+            $tahun = date('Y') - 1;
+        } else {
+            $tahun = date('Y');
+        }
+
+        $data = [
+            'id_mengajar'   => "",
+            'tahun'         => $tahun,
+            'id_kelas'      => $_POST['kelas'],
+            'id_guru'       => $_POST['guru'],
+            'id_mapel'      => $_POST['matapelajaran'],
+            'id_predikat'   => $_POST['predikat']
+        ];
+
+        $this->db->insert('tb_mengajar', $data);
+    }
+
+    public function delete_mengajar($idmengajar)
+    {
+        $query = "DELETE FROM tb_mengajar WHERE id_mengajar=$idmengajar";
+
+        $this->db->query($query);
+    }
 }

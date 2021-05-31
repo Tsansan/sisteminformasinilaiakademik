@@ -44,13 +44,13 @@ class Guru_model extends CI_Model
                 $query = "SELECT * FROM tb_mengajar
                             INNER JOIN tb_kelas ON tb_kelas.id_kelas = tb_mengajar.id_kelas
                             INNER JOIN tb_mapel ON tb_mapel.id_mapel = tb_mengajar.id_mapel
-                            WHERE tb_mengajar.tahun = $year and tb_mengajar.id_guru = $id_guru and tb_mengajar.id_kelas = $id_kelas";
+                            WHERE tb_mengajar.tahun = $year and tb_mengajar.id_guru = $id_guru";
             } elseif ($bulan == "06" || "07" || "08" || "09" || "10" || "11") {
                 $year = $tahun;
                 $query = "SELECT * FROM tb_mengajar
                             INNER JOIN tb_kelas ON tb_kelas.id_kelas = tb_mengajar.id_kelas
                             INNER JOIN tb_mapel ON tb_mapel.id_mapel = tb_mengajar.id_mapel
-                            WHERE tb_mengajar.tahun = $year and tb_mengajar.id_guru = $id_guru and tb_mengajar.id_kelas = $id_kelas";
+                            WHERE tb_mengajar.tahun = $year and tb_mengajar.id_guru = $id_guru";
             }
         }
 
@@ -137,6 +137,14 @@ class Guru_model extends CI_Model
             }
         }
 
+        $data = $this->db->query($query);
+        return $data;
+    }
+
+    public function walikelas($idguru)
+    {
+        $query = "SELECT * FROM tb_kelas 
+                WHERE walikelas = $idguru";
         $data = $this->db->query($query);
         return $data;
     }

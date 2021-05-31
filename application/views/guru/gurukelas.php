@@ -11,22 +11,33 @@
                 <div class="card-body">
                     <!-- kelas -->
                     <div class="mx-3">
-                        <h3>Daftar Siswa </h3>
-                        <select class="form-select" id="carikelas" aria-label="Default select example">
-                            <option selected value=""></option>
-                            <?php foreach ($kelass as $kelas) : ?>
-                                <option value="<?php echo $kelas['id_kelas'] ?>"><?php echo $kelas['kelas'] ?></option>
-                            <?php endforeach; ?>
-                        </select>
+                        <h3>Masukkan Nilai</h3>
+                        <div class="row">
+                            <div class="col-lg-4">
+                                <label for="carikelas">Piliih Kelas</label>
+                                <select class="form-select" id="carikelas" aria-label="Default select example">
+                                    <option selected value="">...</option>
+                                    <?php foreach ($kelass as $kelas) : ?>
+                                        <option value="<?php echo $kelas['id_kelas'] ?>"><?php echo $kelas['kelas'] ?></option>
+                                    <?php endforeach; ?>
+                                </select>
+                            </div>
+                            <div class="col-lg-4">
+                                <label for="carikelas">Jenis Nilai</label>
+                                <select class="form-select" id="jenisnilai" aria-label="Default select example">
+                                    <option selected value="pengetahuan">Pengetahuan</option>
+                                    <option value="keterampilan">Keterampilan</option>
+                                </select>
+                            </div>
+                            <div class="col-2">
+                                <button type="submit" class="btn btn-primary mt-4" id="tombol">Lihat Nilai</button>
+                            </div>
+                        </div>
                     </div>
                     <!-- akhir kelas -->
 
                     <!-- Daftar nama -->
                     <div id="daftarnama">
-                        <label for="inputEmail3" class="col-sm-3 col-form-label-lg ms-3 pt-2">Masukkan NIlai?</label>
-                        <a type="button" href="<?php echo site_url('guru/inputnilaisiswa') . "?kelas=" . $kelas['id_kelas'] . "&nilai=pengetahuan" ?>" class="col-sm-2 btn btn-primary ms-3 mt-1">Pengetahuan</a>
-                        <a type="button" href="<?php echo site_url('guru/inputnilaisiswa') . "?kelas=" . $kelas['id_kelas'] . "&nilai=keterampilan" ?>" class="col-sm-2 btn btn-primary ms-3 mt-1">Keterampilan</a>
-
                         <table class="table my-3">
                             <thead>
                                 <tr>
@@ -60,9 +71,10 @@
 
     var carikelas = document.getElementById('carikelas');
     var daftarnama = document.getElementById('daftarnama');
-    var aksi = document.getElementById('aksi');
+    var jenisnilai = documen.getElementById('jenisnilai');
+    var tombol = documen.getElementById('tombol');
 
-    carikelas.addEventListener('click', function() {
+    tombol.addEventListener('click', function() {
         console.log(carikelas.value);
         // buat objek ajax
         var xhr = new XMLHttpRequest();

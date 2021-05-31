@@ -29,8 +29,8 @@ class guru extends CI_Controller
     public function index()
     {
         $data['biodatas'] = $this->Guru_model->data_guru($this->session->userdata('induk'))->row_array();
+        $data['walikelas'] = $this->Guru_model->walikelas($this->session->userdata('id_guru'))->row_array();
 
-        print_r($data['biodatas']);
         $this->load->view('guru/auth/header', $data);
         $this->load->view('guru/auth/sidebar');
         $this->load->view('guru/guru');
@@ -41,6 +41,7 @@ class guru extends CI_Controller
     {
         // mengambil data kelas baik siswa dan kelasnya
         $data['kelass']     = $this->Guru_model->mengajar($this->session->userdata('id_guru'))->result_array();
+        $data['walikelas'] = $this->Guru_model->walikelas($this->session->userdata('id_guru'))->row_array();
 
         $this->load->view('guru/auth/header', $data);
         $this->load->view('guru/auth/sidebar');
@@ -53,7 +54,8 @@ class guru extends CI_Controller
         $data['mengajars'] = $this->Guru_model->mengajar($this->session->userdata('id_guru'), $_GET['kelas'])->result_array();
         $data['kelass'] = $this->Guru_model->kelas($_GET['kelas'])->result_array();
         $data['jenis'] = $_GET['nilai'];
-        print_r($data['mengajars']);
+        $data['walikelas'] = $this->Guru_model->walikelas($this->session->userdata('id_guru'))->row_array();
+
         $this->load->view('guru/auth/header', $data);
         $this->load->view('guru/auth/sidebar');
         $this->load->view('guru/inputnilaisiswa');
@@ -63,12 +65,17 @@ class guru extends CI_Controller
     public function masukkannilaisiswa()
     {
 
-        $kkm = $this->Guru_model->mengajar($this->session->userdata('id_guru'), $_POST['kelas'])->row_array();
+        $kkm = $this->Guru_model->mengajar($this->session->userdata('id_guru'), $_POST['idkelas'])->row_array();
 
-        $ambilpredikat = $this->db->get_where('tb_predikat', ['kkm' => $kkm])->result_array();
-        for ($a = 0; $a <= 3; $a++) {
+        $ambilpredikat = $this->db->get_where('tb_predikat')->result_array();
+        print_r($ambilpredikat);
+
+        for ($a = 0; $a <= 7; $a++) {
             $predikat[$a] = explode('-', $ambilpredikat[$a]['nilai']);
         }
+
+        echo "<br>";
+        print_r($predikat);
 
         $idnilaimapel   = $_POST['idnilaimapel'];
         $id_absen       = $_POST['idabsen'];
@@ -81,10 +88,20 @@ class guru extends CI_Controller
 
 
         for ($j = 1; $j <= $jumlah; $j++) {
-            for ($k = 0; $k <= 3; $k++) {
-                for ($i = $predikat[$k][0]; $i <= $predikat[$k][1]; $i++) {
-                    if ($nilai[$j] == $i) {
-                        $predikatmasuk[$j] = $ambilpredikat[$k]['id_predikat'];
+            if ($kkm['id_predikat'] == 6) {
+                for ($k = 4; $k <= 7; $k++) {
+                    for ($i = $predikat[$k][0]; $i <= $predikat[$k][1]; $i++) {
+                        if ($nilai[$j] == $i) {
+                            $predikatmasuk[$j] = $ambilpredikat[$k]['id_predikat'];
+                        }
+                    }
+                }
+            } else {
+                for ($k = 0; $k <= 3; $k++) {
+                    for ($i = $predikat[$k][0]; $i <= $predikat[$k][1]; $i++) {
+                        if ($nilai[$j] == $i) {
+                            $predikatmasuk[$j] = $ambilpredikat[$k]['id_predikat'];
+                        }
                     }
                 }
             }
@@ -147,14 +164,28 @@ class guru extends CI_Controller
     public function lihatnilaisiswa()
     {
         $data['kelass'] = $this->Guru_model->mengajar($this->session->userdata('id_guru'))->result_array();
+        $data['walikelas'] = $this->Guru_model->walikelas($this->session->userdata('id_guru'))->row_array();
+
 
         print_r($data['kelass']);
+
         $this->load->view('guru/auth/header', $data);
         $this->load->view('guru/auth/sidebar');
         $this->load->view('guru/lihatnilaisiswa');
         $this->load->view('guru/auth/footer');
     }
 
+    public function walikelas()
+    {
+        $walikelas = $this->Guru_model->walikelas($this->session->userdata('id_guru'))->row_array();
+        $data['kelass'] = $this->Guru_model->kelas($walikelas['id_kelas'])->result_array();
+        $data['walikelas'] = $this->Guru_model->walikelas($this->session->userdata('id_guru'))->row_array();
+
+        $this->load->view('guru/auth/header', $data);
+        $this->load->view('guru/auth/sidebar');
+        $this->load->view('guru/walikelas');
+        $this->load->view('guru/auth/footer');
+    }
 
 
 
@@ -173,6 +204,15 @@ class guru extends CI_Controller
     public function ajaxlihatnilaisiswa()
     {
         $data['kelass'] = $this->Guru_model->lihatnilai($_GET['kelas'], $_GET['jenis'])->result_array();
+
+        for ($i = 0; $i < 2; $i++) {
+            print_r($data['kelass'][$i]);
+            echo "<br>";
+        }
+        if ($data['kelass'] == null) {
+            echo "<br> <h3> Maaf data Kosong Atau Belum Terisi, Silahakn Coba Isi Nilai Kembali di menu kelas -> Daftar Nama SIswa</h3>";
+        }
+
         $this->load->view('guru/ajaxlihatnilaisiswa', $data);
     }
     public function ajaxeditnilaisiswa()

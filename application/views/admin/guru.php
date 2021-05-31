@@ -22,7 +22,8 @@
                                             <tr>
                                                 <th scope="col">#</th>
                                                 <th scope="col">Nama</th>
-                                                <th scope="col">NIP</th>
+                                                <th scope="col">Induk</th>
+                                                <th scope="col">Mapel</th>
                                                 <th scope="col">Kelas</th>
                                                 <th scope="col">Aksi</th>
                                             </tr>
@@ -37,6 +38,13 @@
                                                     <td>
                                                         <?php foreach ($mengajars as $mengajar) : ?>
                                                             <?php if ($guru['id_guru'] == $mengajar['id_guru']) { ?>
+                                                                <?php echo $mengajar['mapel'] . " "; ?>
+                                                            <?php }; ?>
+                                                        <?php endforeach; ?>
+                                                    </td>
+                                                    <td>
+                                                        <?php foreach ($mengajars as $mengajar) : ?>
+                                                            <?php if ($guru['id_guru'] == $mengajar['id_guru']) { ?>
                                                                 <?php echo $mengajar['kelas'] . " "; ?>
                                                             <?php }; ?>
                                                         <?php endforeach; ?>
@@ -47,6 +55,13 @@
                                                             </button>
                                                             <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                                                                 <li><a class="dropdown-item" href="<?php echo site_url('admin/guru') . "?update=" . $guru['id_guru'] ?>">Edit</a></li>
+                                                                <li>
+                                                                    <!-- Button trigger modal -->
+                                                                    <button type="button" class="btn " data-bs-toggle="modal" data-bs-target="#mengajar">
+                                                                        Mata Pelajaran
+                                                                    </button>
+                                                                    <!-- Button triger End -->
+                                                                </li>
                                                                 <li><a class="dropdown-item" href="<?php echo site_url('admin/guru') . "?delete=" . $guru['id_guru'] ?>">Hapus</a></li>
                                                             </ul>
                                                         </div>
@@ -65,6 +80,9 @@
                 </div>
             </div>
             <!-- Akhir ISI Utama -->
+
+
+
             <!-- modal -->
             <div class="modal fade" id="tambahModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                 <div class="modal-dialog">
@@ -138,3 +156,43 @@
                 </div>
             </div>
             <!-- akhir modal -->
+
+
+            <!-- modal mengajar -->
+
+            <div class="modal fade" tabindex="-1" id="mengajar" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title">Materi dan Kelas yang di ampu</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="" method="">
+                                <div class="form-group">
+                                    <label for="matepelajaran">Mata Pelajaran</label>
+                                    <select class="form-control" id="matapelajaran">
+                                        <option selected>...</option>
+                                        <?php foreach ($mapels as $mapel) : ?>
+                                            <option value="<?php echo $mapel['id_mapel']; ?>"><?php echo $mapel['mapel']; ?></option>
+                                            <?php endforeach; ?>\
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label for="kelas">Kelas</label>
+                                    <select class="form-control" id="kelas">
+                                        <option selected>...</option>
+                                        <?php foreach ($kelass as $kelas) : ?>
+                                            <option value="<?php echo $kelas['id_kelas'] ?>"><?php echo $kelas['kelas']; ?></option>
+                                            <?php endforeach; ?>\
+                                    </select>
+                                </div>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary">Save changes</button>
+                        </div>
+                    </div>
+                </div>
+            </div>

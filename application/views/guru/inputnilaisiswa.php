@@ -46,6 +46,7 @@
                                             <td class="col-sm-3"><?php echo $kelas['nama']; ?></td>
                                             <td class="col-sm-1">
                                                 <input type="hidden" name="idnilaimapel[<?php echo $nilaimapel++ ?>]" value="">
+                                                <input type="hidden" name="idkelas" value="<?php echo $kelas['id_kelas']; ?>">
                                                 <input type="hidden" name="idabsen[<?php echo $id_absen++ ?>]" value="<?php echo $kelas['id_absen']; ?>">
                                                 <input type="hidden" name="jenis[<?php echo $jenisnilai++ ?>]" value="<?php echo $jenis ?>">
                                                 <input type="hidden" name="mapel[<?php echo $id_mapel++ ?>]" value="<?php echo $mengajars[0]['id_mapel'] ?>">

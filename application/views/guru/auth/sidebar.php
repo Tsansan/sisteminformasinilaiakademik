@@ -13,16 +13,24 @@
 
                         <br class="divider">
                         <li>
-                            <div class="btn-group dropend">
-                                <a type="button" class="dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-                                    Kelas
-                                </a>
-                                <ul class="dropdown-menu">
-                                    <li><a class="" href="<?php echo site_url('guru/lihatnilaisiswa') ?>">Lihat Nilai</a></li>
-                                    <li><a class="" href="<?php echo site_url('guru/kelas') ?>">Daftar Nama Siswa</a></li>
-                                </ul>
+                            <div type="button">
+                                <a class="" href="<?php echo site_url('guru/lihatnilaisiswa') ?>">Lihat Nilai</a>
                             </div>
                         </li>
+                        <li>
+                            <div type="button">
+                                <a class="" href="<?php echo site_url('guru/kelas') ?>">Masukkan Nilai</a>
+                            </div>
+                        </li>
+                        <?php if ($walikelas != null) : ?>
+                            <li>
+                                <div type="button">
+                                    <a href="<?php echo site_url('guru/walikelas') ?>">
+                                        Wali Kelas
+                                    </a>
+                                </div>
+                            </li>
+                        <?php endif; ?>
                         <li>
                             <div type="button">
                                 <a href="<?php echo site_url('rapot/logout') ?>">Log out</a>
